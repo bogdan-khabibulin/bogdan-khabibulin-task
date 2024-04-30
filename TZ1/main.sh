@@ -4,7 +4,7 @@
 read -p "Введите путь к входной директории: " input_dir
 
 # Проверка наличия входной директории
-if [ ! -d "$input_dir" ]; then
+if [[ ! -d "$input_dir" ]]; then
     echo "Ошибка: входная директория $input_dir не существует."
     exit 1
 fi
@@ -13,7 +13,7 @@ fi
 read -p "Введите путь к выходной директории: " output_dir
 
 # Проверка наличия выходной директории
-if [ ! -d "$output_dir" ]; then
+if [[ ! -d "$output_dir" ]]; then
     echo "Ошибка: выходная директория $output_dir не существует."
     exit 1
 fi
@@ -36,10 +36,10 @@ echo "$files" | while IFS='' read file; do
     # Получаем имя файла без пути
     filename=$(basename "$file")
     # Проверяем, существует ли уже такой файл в выходной директории
-    if [ -e "$output_dir/$filename" ]; then
+    if [[ -e "$output_dir/$filename" ]]; then
         # Если файл с таким именем уже существует, добавляем к имени уникальный суффикс
         counter=1
-        while [ -e "$output_dir/${filename%.*}($counter).${filename##*.}" ]; do
+        while [[ -e "$output_dir/${filename%.*}($counter).${filename##*.}" ]]; do
             counter=$((counter + 1))
         done
         # Копируем файл с новым именем
@@ -51,4 +51,3 @@ echo "$files" | while IFS='' read file; do
 done
 
 echo "Файлы успешно скопированы из $input_dir в $output_dir."
-
